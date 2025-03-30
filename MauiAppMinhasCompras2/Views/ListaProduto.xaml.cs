@@ -158,4 +158,24 @@ public partial class ListaProduto : ContentPage
             lst_produtos.IsRefreshing = false;
         }
     }
+
+    private async void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
+		try
+		{
+			List<TotalCategoria> total_categoria = await App.Db.GetTotalByCategoria();
+
+			string msg = "";
+
+			foreach (var item in total_categoria)
+			{
+				msg += $"{item.Categoria}: {item.Total:C}\n";
+			}
+
+			await DisplayAlert("Total por Categoria", msg, "OK");
+        }catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
+    }
 }

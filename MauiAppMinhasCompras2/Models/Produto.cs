@@ -61,4 +61,10 @@ namespace MauiAppMinhasCompras2.Models
             }
         }
     }
+
+    public class TotalCategoria
+    {
+        public string Categoria { get; set; }
+        public double Total { get; set; }
+    }
 }
