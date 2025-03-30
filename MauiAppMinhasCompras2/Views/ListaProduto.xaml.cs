@@ -134,4 +134,28 @@ public partial class ListaProduto : ContentPage
 			lst_produtos.IsRefreshing = false;
         }
     }
+
+    private async void txt_categoria_search_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        try
+        {
+            string categoria = e.NewTextValue;
+
+            lst_produtos.IsRefreshing = true;
+
+            lista.Clear();
+
+			List<Produto> filtrados = await App.Db.GetByCategoria(categoria);
+
+            filtrados.ForEach(i => lista.Add(i));
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Ops", ex.Message, "OK");
+        }
+        finally
+        {
+            lst_produtos.IsRefreshing = false;
+        }
+    }
 }
